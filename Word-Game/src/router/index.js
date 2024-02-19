@@ -1,5 +1,5 @@
 
-import { createRouter, createWebHistory } from 'vue-router/auto'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/index.vue'
 import Game from '../pages/TheGame.vue'
 
@@ -18,4 +18,3 @@ const router = createRouter({
 })
 
 export default router
-console.log(router.options.routes);

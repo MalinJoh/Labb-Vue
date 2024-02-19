@@ -1,7 +1,7 @@
 <script setup>
 import GameComponent from '@/components/GameComponent.vue'
-console.log('TheGame component loaded')
+
 </script>
 <template>
-  <GameComponent />
+  <GameComponent :word="currentWord" :definition="currentDefinition" />
 </template>
