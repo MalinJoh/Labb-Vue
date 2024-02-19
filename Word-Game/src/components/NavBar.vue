@@ -7,7 +7,7 @@ import { RouterLink} from 'vue-router';
       <div>
         <ul>
           <li>
-            <RouterLink to="/"> Dictionary </RouterLink>
+            <RouterLink to="/"> Definition </RouterLink>
           </li>
           <li>
             <RouterLink to="/Game"> The Game </RouterLink>

@@ -7,39 +7,36 @@
     <div>
       <h2>Word Defintions</h2>
       <input v-model="searchQuery" placeholder="Enter a word">
-    <button @click="fetchDefinitions">Search</button>
       <ul>
         <li v-for="(definition, index) in definitions" :key="index">
           {{ definition.word }}: {{ definition.meaning }}
-        </li>
+      </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { watch, ref } from 'vue'
 import { dictionarySearch } from '@/store/getDefinition'
 
-export default {
-  setup() {
-const searchQuery = ref('');
-const dictionaryStore = dictionarySearch();
-const definitions = ref([]);
+const props = defineProps({
+  initialWord: String
+})
+const dictionaryStore = dictionarySearch()
+const searchQuery = ref(props.initialWord || '')
+const definitions = ref([])
 
-const fetchDefinitions = async () => {
-  await dictionaryStore.dictionaryFetch(searchQuery.value);
-  if (dictionaryStore.currentDefinition) {
-    definitions.value = [{ word: searchQuery.value, meaning: dictionaryStore.currentDefinition }];
-  }
-}
-return {
-      searchQuery,
-      definitions,
-      fetchDefinitions
+watch(searchQuery, async (newQuery) => {
+  if (newQuery && newQuery.trim()) {
+    await dictionaryStore.dictionaryFetch(newQuery);
+    if (dictionaryStore.currentDefinition) {
+      definitions.value = [{ word: newQuery, meaning: dictionaryStore.currentDefinition }];
     }
-}
-}
+  } else {
+    definitions.value = [];
+  }
+}, { immediate: true });
 
 
 </script>
@@ -47,4 +44,3 @@ return {
 <style>
 /* Stilar här om det behövs */
 </style>
-@/store/getDefinition

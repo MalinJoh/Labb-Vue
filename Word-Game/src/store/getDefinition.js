@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const dictionarySearch = defineStore('dictionary', {
+export const dictionarySearch = defineStore('definition', {
   state: () => ({
     currentDefinition: '',
     correctWord: ''
