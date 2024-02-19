@@ -19,7 +19,7 @@
 
 <script>
 import { ref } from 'vue'
-import { dictionarySearch } from '@/store/dictionary'
+import { dictionarySearch } from '@/store/getDefinition'
 
 export default {
   setup() {
@@ -32,7 +32,12 @@ const fetchDefinitions = async () => {
   if (dictionaryStore.currentDefinition) {
     definitions.value = [{ word: searchQuery.value, meaning: dictionaryStore.currentDefinition }];
   }
-};
+}
+return {
+      searchQuery,
+      definitions,
+      fetchDefinitions
+    }
 }
 }
 
@@ -42,3 +47,4 @@ const fetchDefinitions = async () => {
 <style>
 /* Stilar här om det behövs */
 </style>
+@/store/getDefinition
