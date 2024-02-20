@@ -1,15 +1,34 @@
 <template>
-  <div>
-    <h1>Ordkunskapsspel</h1>
-    <div v-if="!gameOver">
-      <p>{{ currentDefinition }}</p>
-      <input v-model="userInput" type="text" placeholder="Gissa ordet">
-      <button @click="checkAnswer">Gissa</button>
-    </div>
-    <div v-else>
-      <p>Spelet är slut! Din poäng: {{ score }}</p>
-    </div>
-  </div>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" sm="10" md="8">
+        <v-img src="../assets/img/banner-5213796_1280.jpg"
+          width="500" height="200" cover
+          class="mx-auto"></v-img>
+        <v-card class="mt-5">
+          <v-card-title class="justify-center">What's the word?</v-card-title>
+          <v-card-text>
+            <div v-if="!gameOver">
+              <v-card-text class="d-flex align-center justify-center">
+              <v-text-field
+                v-model="userInput"
+                label="Guess the word"
+                outlined
+                class="mx-auto"
+                style="max-width: 400px;"
+              ></v-text-field>
+              <v-btn color="black" class="mx-auto mt-3" style="margin-bottom: 30px;" @click="checkAnswer">Guess</v-btn>
+            </v-card-text>
+              <p>{{ currentDefinition }}</p>
+            </div>
+            <div v-else>
+              <p>Spelet är slut! Din poäng: {{ score }}</p>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -23,7 +42,7 @@ export default {
       userInput: '',
       score: 0,
       gameOver: false,
-      words: ['oven', 'bed', 'banana', 'cat', 'test'],
+      words: ['water', 'carrot', 'computer', 'heart','oven', 'bed', 'banana', 'cat', 'car', 'mammoth'],
       currentWordIndex: 0
     }
   },
@@ -44,11 +63,11 @@ export default {
       console.log(this.correctWord)
       if (this.userInput.toLowerCase() === this.correctWord.toLowerCase()) {
         this.score++
-        this.displayMessage('Grattis, det var rätt svar!', true)
+        this.displayMessage('Congratulations! You guessed the right word', true)
         this.fetchDefinition()
       }
       else {
-        this.displayMessage('Tyvärr, det var fel svar.', false)
+        this.displayMessage('Sorry, the correct word was: ' + this.correctWord, false)
         this.fetchDefinition()
       }
       this.userInput = ''
@@ -62,3 +81,8 @@ export default {
   }
 }
 </script>
+
+<style>
+.custom-btn-hover:hover {
+  background-color: grey !important;
+}</style>
