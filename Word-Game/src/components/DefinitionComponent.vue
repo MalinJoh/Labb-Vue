@@ -1,4 +1,5 @@
 <template>
+  <!-- Layout och formulär för att söka på ord och få upp definitionerna -->
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8">
@@ -34,30 +35,33 @@
 </template>
 
 <script setup>
+/* importera funktioiner jag kommer att använda från vue, även min fetch med pinia */
 import { watch, ref } from 'vue'
 import { dictionarySearch } from '@/store/getDefinition'
 
 const props = defineProps({
   initialWord: String
 })
+// Skapa instans och variabler till sökfunktionen
 const dictionaryStore = dictionarySearch()
 const searchQuery = ref(props.initialWord || '')
 const definitions = ref([])
-
+// En watcher som lyssnar på förändringar i sökfältet
 watch(searchQuery, async (newQuery) => {
+    // Kontrollera om det finns ett nytt ord i sökfälet som inte bara består av vita tecken
   if (newQuery && newQuery.trim()) {
+        // Om det finns en sökfråga, anropa dictionaryFetch-funktionen
     await dictionaryStore.dictionaryFetch(newQuery)
     if (dictionaryStore.currentDefinition) {
+      // Om en definition finns, uppdateras definitions-variabeln med en array som innehåller ett objekt med ordet och dess betydelse
       definitions.value = [{ word: newQuery, meaning: dictionaryStore.currentDefinition }]
     }
   } else {
     definitions.value = []
   }
-}, { immediate: true })
+},
+//immediate: true för att watch-funktionen omedelbart ska köra när komponenten skapas
+{ immediate: true })
 
 
 </script>
-
-<style>
-/* Stilar här om det behövs */
-</style>

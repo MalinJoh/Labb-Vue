@@ -1,4 +1,5 @@
 <template>
+  <!-- Layout för spel där man gissar vilket ord som definieras  -->
   <v-container class="mt-5">
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8">
@@ -17,7 +18,7 @@
                 class="mx-auto"
                 @keyup.enter="checkAnswer"
               ></v-text-field>
-              <v-btn color="black" class="mx-auto ml-7 mb-5 custom-btn-hover" @click="checkAnswer">Guess</v-btn>
+              <v-btn color="black" class="mx-auto ml-7 mb-5" @click="checkAnswer">Guess</v-btn>
             </v-card-text>
               <p>{{ currentDefinition }}</p>
             </div>
@@ -36,6 +37,7 @@ import axios from 'axios'
 
 export default {
   data() {
+    // komponentens dataobjekt med initiala värden
     return {
       currentDefinition: '',
       correctWord: '',
@@ -47,35 +49,46 @@ export default {
     }
   },
   methods: {
+    // Asynkron funktion för att hämta definitionen för det aktuella ordet från API
     async fetchDefinition() {
       const currentWord = this.words[this.currentWordIndex]
-      const response = await axios.get(`https://dictionaryapi.com/api/v3/references/collegiate/json/${currentWord}?key=4be9eba3-a4f4-4fe1-81c9-ad135e001277`);
+      const response = await axios.get(`https://dictionaryapi.com/api/v3/references/collegiate/json/${currentWord}?key=4be9eba3-a4f4-4fe1-81c9-ad135e001277`)
+      // Extrahera definitionen och det korrekta ordet från API-svaret
       const definition = response.data[0].shortdef[0]
       const word = response.data[0].meta.id
+      // Uppdatera komponentens data med den hämtade definitionen och det korrekta ordet
       this.currentDefinition = definition
       this.correctWord = word.split(':')[0]
+      // Öka indexet för det aktuella ordet för nästa gång funktionen anropas
       this.currentWordIndex++
+      // Kontrollera om spelet är över genom att jämföra indexet med antalet ord
       if(this.currentWordIndex > this.words.length) {
         this.gameOver = true
       }
     },
+    // En funktion för att kontrollera användarens svar och hantera resultatet
     checkAnswer() {
+      // Jämför användarens inmatning med det korrekta ordet
       console.log(this.correctWord)
       if (this.userInput.toLowerCase() === this.correctWord.toLowerCase()) {
+        // Om användaren gissar rätt, öka poängen, visa ett meddelande och hämta nästa ord
         this.score++
         this.displayMessage('Congratulations! You guessed the right word', true)
         this.fetchDefinition()
       }
       else {
+        // Om användaren gissar fel, visa det korrekta ordet i ett meddelande och hämta nästa ord
         this.displayMessage('Sorry, the correct word was: ' + this.correctWord, false)
         this.fetchDefinition()
       }
       this.userInput = ''
     },
+    // Alert för att visa ett meddelande om antingen lyckat eller misslyckat svar
     displayMessage(message, isSuccess) {
       alert(message, isSuccess)
     }
   },
+  // Hämta den första definitionen när komponenten skapas
   created() {
     this.fetchDefinition()
   }
@@ -83,6 +96,6 @@ export default {
 </script>
 
 <style>
-.custom-btn-hover:hover {
-  background-color: grey !important;
+v-btn {
+  background-color: grey;
 }</style>

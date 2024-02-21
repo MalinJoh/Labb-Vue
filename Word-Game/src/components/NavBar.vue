@@ -11,11 +11,10 @@ import { RouterLink} from 'vue-router';
         <v-list
           density="compact"
           nav
-
         >
-          <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="Home"><RouterLink to="/"> Definition </RouterLink></v-list-item>
+          <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="Home"><RouterLink to="/" style="color: black;"> Definition </RouterLink></v-list-item>
           <v-list-item prepend-icon="mdi-domain" title="Game" value="Game">
-            <RouterLink to="/Game"> The Game </RouterLink></v-list-item>
+            <RouterLink to="/Game" style="color: black;"> The Game </RouterLink></v-list-item>
         </v-list>
       </v-navigation-drawer>
       <v-main style="height: 120px "></v-main>
