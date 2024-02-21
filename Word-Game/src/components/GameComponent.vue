@@ -23,7 +23,7 @@
               <p>{{ currentDefinition }}</p>
             </div>
             <div v-else>
-              <p>Spelet är slut! Din poäng: {{ score }}/10</p>
+              <p>Game is over! Your points: {{ score }}/10</p>
             </div>
           </v-card-text>
         </v-card>
