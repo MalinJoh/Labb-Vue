@@ -8,6 +8,9 @@
         <v-card class="mt-5">
           <v-card-title class="justify-center">Word Definitions</v-card-title>
           <v-card-text>
+            Type in a word and get the definition
+          </v-card-text>
+          <v-card-text>
             <v-text-field
               v-model="searchQuery"
               label="Enter a word"

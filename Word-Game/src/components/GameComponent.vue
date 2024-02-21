@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mt-5">
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8">
         <v-img src="../assets/img/wordgamepic.jpg"
@@ -7,22 +7,22 @@
           class="mx-auto"></v-img>
         <v-card class="mt-5">
           <v-card-title class="justify-center">What's the word?</v-card-title>
+          <v-card-text> Read the definition below and guess what word it's defining</v-card-text>
           <v-card-text>
             <div v-if="!gameOver">
               <v-card-text class="d-flex align-center justify-center">
               <v-text-field
                 v-model="userInput"
                 label="Guess the word"
-                outlined
                 class="mx-auto"
-                style="max-width: 400px;"
+                @keyup.enter="checkAnswer"
               ></v-text-field>
-              <v-btn color="black" class="mx-auto mt-3" style="margin-bottom: 30px;" @click="checkAnswer">Guess</v-btn>
+              <v-btn color="black" class="mx-auto ml-7 mb-5 custom-btn-hover" @click="checkAnswer">Guess</v-btn>
             </v-card-text>
               <p>{{ currentDefinition }}</p>
             </div>
             <div v-else>
-              <p>Spelet är slut! Din poäng: {{ score }}</p>
+              <p>Spelet är slut! Din poäng: {{ score }}/10</p>
             </div>
           </v-card-text>
         </v-card>
@@ -42,7 +42,7 @@ export default {
       userInput: '',
       score: 0,
       gameOver: false,
-      words: ['water', 'carrot', 'computer', 'heart','oven', 'bed', 'banana', 'cat', 'car', 'mammoth'],
+      words: ['water', 'flower', 'carrot', 'computer', 'heart','oven', 'bed', 'banana', 'cat', 'mammoth'],
       currentWordIndex: 0
     }
   },
