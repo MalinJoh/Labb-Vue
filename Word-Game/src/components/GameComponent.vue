@@ -2,8 +2,8 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8">
-        <v-img src="../assets/img/banner-5213796_1280.jpg"
-          width="500" height="200" cover
+        <v-img src="../assets/img/wordgamepic.jpg"
+          width="500" height="400" cover
           class="mx-auto"></v-img>
         <v-card class="mt-5">
           <v-card-title class="justify-center">What's the word?</v-card-title>

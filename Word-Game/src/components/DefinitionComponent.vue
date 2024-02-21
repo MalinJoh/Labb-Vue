@@ -2,9 +2,9 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8">
-        <v-img src="../assets/img/definition-390785_1280.jpg"
-          width="500" height="200" cover
-          class="d-flex align-center mx-auto"></v-img>
+        <v-img src="../assets/img/definitionpic.jpg"
+          width="500" height="400" cover
+          class="mx-auto"></v-img>
         <v-card class="mt-5">
           <v-card-title class="justify-center">Word Definitions</v-card-title>
           <v-card-text>
@@ -13,7 +13,7 @@
               label="Enter a word"
               outlined
               class="mx-auto"
-              style="max-width: 500px;"
+              style="max-width: 400px;"
             ></v-text-field>
             <v-list>
               <v-list-item v-for="(definition, index) in definitions" :key="index">
