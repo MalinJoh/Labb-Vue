@@ -8,3 +8,13 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+
+@media (max-width: 600px) {
+  v-container {
+    padding: 8px;
+  }
+
+  v-card-title {
+    font-size: 16px;
+  }
+}

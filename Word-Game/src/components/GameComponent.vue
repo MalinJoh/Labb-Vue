@@ -3,9 +3,7 @@
   <v-container class="mt-5">
     <v-row justify="center">
       <v-col cols="12" sm="10" md="8">
-        <v-img src="../assets/img/wordgamepic.jpg"
-          width="500" height="400" cover
-          class="mx-auto"></v-img>
+        <v-img src="../assets/img/wordgamepic.jpg" max-width="100%" height="auto" class="mx-auto"></v-img>
         <v-card class="mt-5">
           <v-card-title class="justify-center">What's the word?</v-card-title>
           <v-card-text> Read the definition below and guess what word it's defining</v-card-text>

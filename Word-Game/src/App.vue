@@ -4,7 +4,7 @@
 <template>
   <v-app>
     <!-- Sidomeny med navigationslänkar -->
-      <v-navigation-drawer app permanent>
+    <v-navigation-drawer app :temporary="$vuetify.breakpoint.xsOnly" permanent>
       <NavBar />
     </v-navigation-drawer>
     <v-main>
