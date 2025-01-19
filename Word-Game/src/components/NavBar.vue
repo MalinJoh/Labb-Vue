@@ -1,53 +1,55 @@
 <script setup>
-import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { useDisplay } from 'vuetify'; // Import Vuetify composable
+import { useDisplay } from 'vuetify';
 
-const drawer = ref(false);
-const { xsOnly } = useDisplay(); // Access breakpoint for responsiveness
+const { xsOnly } = useDisplay();
 </script>
 
 <template>
-  <v-app>
-    <!-- App Bar for small screens -->
-    <v-app-bar flat app>
-      <v-btn icon @click="drawer = !drawer">
+  <!-- Top Navbar -->
+  <v-app-bar app flat>
+    <v-toolbar-title>Your Definition Page</v-toolbar-title>
+    <v-spacer></v-spacer>
+
+    <!-- Links for Desktop -->
+    <template v-if="!xsOnly">
+      <v-btn text>
+        <RouterLink to="/" style="color: inherit;">Definition</RouterLink>
+      </v-btn>
+      <v-btn text>
+        <RouterLink to="/Game" style="color: inherit;">The Game</RouterLink>
+      </v-btn>
+    </template>
+
+    <!-- Hamburger Menu for Mobile -->
+    <template v-else>
+      <v-btn icon>
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-      <v-toolbar-title>Word Game</v-toolbar-title>
-    </v-app-bar>
+    </template>
+  </v-app-bar>
 
-    <!-- Responsive Navigation Drawer -->
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      :temporary="xsOnly"
-      permanent
-    >
-      <v-list nav dense>
-        <v-list-item prepend-icon="mdi-view-dashboard" title="Definition">
-          <RouterLink to="/" style="color: inherit;">Definition</RouterLink>
-        </v-list-item>
-        <v-list-item prepend-icon="mdi-gamepad-variant" title="Game">
-          <RouterLink to="/Game" style="color: inherit;">The Game</RouterLink>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </v-app>
+  <!-- Mobile Navigation Drawer -->
+  <v-navigation-drawer v-if="xsOnly" v-model="drawer" app temporary>
+    <v-list nav dense>
+      <v-list-item>
+        <RouterLink to="/" style="color: inherit;">Definition</RouterLink>
+      </v-list-item>
+      <v-list-item>
+        <RouterLink to="/Game" style="color: inherit;">The Game</RouterLink>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <style scoped>
-/* Optional styles for better responsiveness */
-.v-navigation-drawer {
-  max-width: 250px;
-}
-
+/* Ensure the app bar doesn't take excessive space */
 .v-app-bar {
   background-color: #fff;
   color: #000;
 }
 
-.v-list-item {
+.v-btn {
   font-size: 1rem;
 }
 </style>

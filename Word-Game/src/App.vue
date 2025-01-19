@@ -1,16 +1,13 @@
 <script setup>
 import NavBar from './components/NavBar.vue';
-import { useDisplay } from 'vuetify'; // Import Vuetify composable
-
-const { xsOnly } = useDisplay(); // Access breakpoint
 </script>
 
 <template>
   <v-app>
-    <!-- Responsive Navigation Drawer -->
-    <v-navigation-drawer app :temporary="xsOnly" permanent>
-      <NavBar />
-    </v-navigation-drawer>
+    <!-- Top Navbar -->
+    <NavBar />
+
+    <!-- Main Content -->
     <v-main>
       <v-container class="fill-height" fluid>
         <v-row align:center justify="center">
